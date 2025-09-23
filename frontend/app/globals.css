@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@media (max-width: 640px) {
+  .rt-table thead { display: none; }
+  .rt-table tbody tr { display: block; border-top: 1px solid #e5e7eb; padding: .5rem .25rem; }
+  .rt-table tbody tr + tr { margin-top: .25rem; }
+  .rt-table tbody td { display: flex; justify-content: space-between; gap: .75rem; padding: .5rem .25rem; }
+  .rt-table tbody td::before { content: attr(data-label); font-weight: 600; color: #6b7280; }
+}
