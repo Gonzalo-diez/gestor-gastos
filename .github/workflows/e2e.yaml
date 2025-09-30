@@ -1,0 +1,21 @@
+name: e2e
+on: [pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+        working-directory: frontend
+      - run: npx playwright install --with-deps
+        working-directory: frontend
+      - run: npm run e2e
+        working-directory: frontend
+      - if: always()
+        run: npx playwright show-report --host 0.0.0.0 --port 9223 &
+        working-directory: frontend
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: playwright-report, path: frontend/playwright-report }
